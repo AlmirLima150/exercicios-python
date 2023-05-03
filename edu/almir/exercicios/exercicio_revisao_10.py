@@ -1,11 +1,16 @@
-eleitores = int(input("digite a quantidade total de eleitoras"))
+while True:
+    eleitores = int(input("digite a quantidade total de eleitoras: "))
 
-votos_brancos = int(input("digite a quantidade de votos em branco"))
-votos_nulos = int(input("digite a quantidade de votos nulos"))
-votos_validos = int(input("digite a quantidade de validos"))
+    votos_validos = int(input("digite a quantidade de validos: "))
+    votos_brancos = int(input("digite a quantidade de votos em branco: "))
+    votos_nulos = int(input("digite a quantidade de votos nulos: "))
 
-if votos_validos + votos_nulos+ votos_brancos > eleitores:
-    print("Essa eleição teve fraude! Refaça.")
+    if votos_validos + votos_nulos + votos_brancos > eleitores:
+        print("Essa eleição teve fraude! Refaça.")
+        continue
+    else:
+        print("A votação ocorreu bem!")
+        break
 
 percent_branco = (votos_brancos/eleitores) * 100
 percent_nulos = (votos_nulos/eleitores) * 100
