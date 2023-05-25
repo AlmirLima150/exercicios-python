@@ -1,0 +1,157 @@
+import os
+
+tabuleiro = [
+    [' ', ' ', ' '],
+    [' ', ' ', ' '],
+    [' ', ' ', ' ']
+]
+
+jogador = 1
+jogadas = 0
+jogadas_maximas = 9
+vitoria = 'n'
+
+
+def tela():
+    tabuleiro
+    jogadas
+    os.system('cls')
+    print('    0   1   2')
+    print('0:  ' + tabuleiro[0][0] + ' | ' +
+          tabuleiro[0][1] + ' | ' + tabuleiro[0][2])
+    print('   -----------')
+    print('1:  ' + tabuleiro[1][0] + ' | ' +
+          tabuleiro[1][1] + ' | ' + tabuleiro[1][2])
+    print('   -----------')
+    print('2:  ' + tabuleiro[2][0] + ' | ' +
+          tabuleiro[2][1] + ' | ' + tabuleiro[2][2])
+    print('Jogadas: ' + str(jogadas))
+
+
+def jogador1():
+    global jogadas
+    global jogadas_maximas
+    global jogador
+
+    if jogador == 1 and jogadas < jogadas_maximas:
+
+        try:
+            print('Escolha do jogador 1')
+            linha = int(input('Em qual linha deseja jogar: '))
+            coluna = int(input('Em qual coluna deseja jogar: '))
+            while tabuleiro[linha][coluna] != ' ':
+                print('O local ja foi marcado! Escolha um valido')
+                linha = int(input('Em qual linha deseja jogar: '))
+                coluna = int(input('Em qual coluna deseja jogar: '))
+            tabuleiro[linha][coluna] = 'X'
+            jogador = 2
+            jogadas += 1
+        except:
+            ...
+
+
+def jogador2():
+    global jogadas
+    global jogadas_maximas
+    global jogador
+
+    if jogador == 2 and jogadas < jogadas_maximas:
+
+        try:
+
+            print('Escolha do jogador 2')
+            linha = int(input('Em qual linha deseja jogar: '))
+            coluna = int(input('Em qual coluna deseja jogar: '))
+
+            while tabuleiro[linha][coluna] != ' ':
+                print('O local ja foi marcado! Escolha um valido')
+                linha = int(input('Em qual linha deseja jogar: '))
+                coluna = int(input('Em qual coluna deseja jogar: '))
+            tabuleiro[linha][coluna] = 'O'
+            jogador = 1
+            jogadas += 1
+
+        except:
+            ...
+
+
+def verificar_vitoria():
+    global tabuleiro
+    global vitoria      
+    simbolos = ['X', 'O']
+
+    for s in simbolos:
+        vitoria = 'n'
+        il=0
+        ic=0
+        while il<3:
+            soma=0
+            ic=0
+            while ic<3:
+                if tabuleiro[il][ic]==s:
+                    soma+=1
+                ic+=1
+            il+=1
+            if soma==3:
+                vitoria=s
+                break
+        if vitoria!='n':
+            break
+
+        while ic<3:
+            soma=0
+            il=0
+            while il<3:
+                if tabuleiro[il][ic]==s:
+                    soma+=1
+                il+=1
+            ic+=1
+            if soma==3:
+                vitoria=s
+                break
+        if vitoria!='n':
+            break
+        
+        soma = 0
+        idag = 0
+        while idag<3:
+            if tabuleiro[idag][idag]==s:
+                soma+=1
+            idag+=1
+        if soma==3:
+            vitoria=s
+            break
+        soma = 0
+        idagl = 0
+        idagc = 2
+        while idagc<3:
+            if tabuleiro[idagl][idagc]==s:
+                soma+=1
+            idagl+=1
+            idagc-=1
+        if soma==3:
+            vitoria=s
+            break
+        
+        if vitoria!='n':
+            break
+    return vitoria
+    #
+    # if jogada_linha == 0:
+    #     ...
+    # if jogada_linha == 1:
+    #     ...
+    # if jogada_linha == 2:
+    #     ...
+    # else:
+    #     print('Essa linha não existe! escolha novamente')
+    #     continue
+
+
+while True:
+
+    tela()
+    jogador1()
+    tela()
+    jogador2()
+    verificar_vitoria()
